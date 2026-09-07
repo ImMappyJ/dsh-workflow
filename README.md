@@ -273,12 +273,21 @@ Then open **http://127.0.0.1:3090/** in your browser.
 
 ### Deploy as a DSH plugin
 
-The plugin is loaded by a DSH host via its plugin registry (`cordis.patch.yml` declares the plugin and its `apiProxy` injection):
+The plugin is published on npm as `@ImMappyJ/dsh-plugin-workflow`. In the DSH profile's `package.json`, add it as a dependency:
 
 ```bash
-# after `npm run build`, copy the runtime artifacts into the DSH plugin directory
-cp -r lib public cordis.patch.yml ~/.dsh/plugins/dsh-plugin-workflow/
+cd ~/.dsh/profiles/web
+pnpm add @ImMappyJ/dsh-plugin-workflow
 ```
+
+The profile's `node_modules` will contain the plugin. The host loads it via `cordis.patch.yml` (which declares the plugin and its `apiProxy` injection).
+
+> **Alternative: local development.** If you are developing the plugin locally, use the `link:` protocol instead:
+> ```bash
+> # after `npm run build`, copy into the DSH plugins directory
+> cp -r lib public cordis.patch.yml package.json LICENSE ~/.dsh/plugins/dsh-plugin-workflow/
+> # then in profiles/web/package.json: "dsh-plugin-workflow": "link:../../plugins/dsh-plugin-workflow"
+> ```
 
 On host startup the plugin:
 
