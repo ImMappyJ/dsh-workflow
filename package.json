@@ -1,6 +1,10 @@
 {
-  "name": "dsh-plugin-workflow",
+  "name": "@ImMappyJ/dsh-plugin-workflow",
   "version": "0.1.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
   "description": "Multi-Agent Workflow plugin for DeepSeek Harness (dsh)",
   "type": "module",
   "license": "MIT",
