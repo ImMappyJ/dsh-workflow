@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "deploy": "npm run build && cp -r lib public cordis.patch.yml package.json LICENSE ~/.dsh/plugins/dsh-plugin-workflow/",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
