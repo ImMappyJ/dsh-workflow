@@ -24,7 +24,9 @@ import type { AgentRunner, AgentRunRequest, AgentRunChunk } from '../engine/runn
 export function normalizeWorkspaceCwd(workspaceDir: string | undefined): string | undefined {
   if (!workspaceDir || !String(workspaceDir).trim()) return undefined;
   const raw = String(workspaceDir).trim();
-  if (!isAbsolute(raw)) return undefined;
+  // 支持 Linux 绝对路径（/home/...）和 Windows 绝对路径（C:\... 或 C:/...）
+  // 在 Linux CI runner 上 isAbsolute('D:\\...') 返回 false，需额外检测
+  if (!isAbsolute(raw) && !/^[A-Za-z]:[/\\]/.test(raw)) return undefined;
   return raw.replace(/\\/g, '/');
 }
 
