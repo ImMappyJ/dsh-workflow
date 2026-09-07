@@ -1,0 +1,38 @@
+# Publish to npm
+#
+# 推送版本标签（v*）时自动构建并发布到 npm registry。
+# GitHub Actions 的服务器网络不受公司代理限制，可正常访问 registry.npmjs.org。
+#
+# 使用前：
+#   1. 在 https://www.npmjs.com/settings/<your-username>/tokens 创建 Access Token
+#   2. 在 GitHub 仓库 Settings → Secrets and variables → Actions → 添加 NPM_TOKEN
+
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*'          # v0.1.0, v0.2.0 ...
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Run tests
+        run: npm test
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
