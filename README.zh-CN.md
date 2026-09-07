@@ -251,7 +251,7 @@ A → B → C
 
 ```bash
 # 1. 克隆（替换为你的实际仓库地址）
-git clone https://github.com/<owner>/dsh-workflow.git
+git clone https://github.com/ImMappyJ/dsh-workflow.git
 cd dsh-workflow
 
 # 2. 安装依赖（仅开发依赖：TypeScript + Vitest）

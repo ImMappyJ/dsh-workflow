@@ -251,7 +251,7 @@ Requirements: Node.js (with npm), a terminal.
 
 ```bash
 # 1. Clone (replace with your actual repository URL)
-git clone https://github.com/<owner>/dsh-workflow.git
+git clone https://github.com/ImMappyJ/dsh-workflow.git
 cd dsh-workflow
 
 # 2. Install dependencies (dev-only: TypeScript + Vitest)
