@@ -1,0 +1,318 @@
+{
+  "executionId": "exec_1788247887904_1",
+  "workflowId": "wf_human_ca",
+  "workflowVersion": 1,
+  "defSnapshot": {
+    "version": "1.0",
+    "id": "wf_human_ca",
+    "name": "human-ca-walkthrough",
+    "createdAt": "2026-09-01T00:00:00Z",
+    "updatedAt": "2026-09-01T07:31:27.392Z",
+    "nodes": [
+      {
+        "id": "start",
+        "type": "start",
+        "name": "start",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-start"
+        },
+        "roleDescription": "desc-start",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {}
+      },
+      {
+        "id": "planner",
+        "type": "agent",
+        "name": "planner",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-planner"
+        },
+        "roleDescription": "desc-planner",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {}
+      },
+      {
+        "id": "approve",
+        "type": "human_task",
+        "name": "approve",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-approve"
+        },
+        "roleDescription": "人工审批",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {
+          "taskPrompt": "请人工确认上线清单"
+        }
+      },
+      {
+        "id": "end",
+        "type": "end",
+        "name": "end",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-end"
+        },
+        "roleDescription": "desc-end",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {}
+      }
+    ],
+    "edges": [
+      {
+        "id": "e0",
+        "source": {
+          "nodeId": "start",
+          "output": "main"
+        },
+        "target": {
+          "nodeId": "planner",
+          "input": "main"
+        },
+        "transform": {
+          "enabled": false,
+          "instruction": ""
+        },
+        "condition": null
+      },
+      {
+        "id": "e1",
+        "source": {
+          "nodeId": "planner",
+          "output": "main"
+        },
+        "target": {
+          "nodeId": "approve",
+          "input": "main"
+        },
+        "transform": {
+          "enabled": false,
+          "instruction": ""
+        },
+        "condition": null
+      },
+      {
+        "id": "e2",
+        "source": {
+          "nodeId": "approve",
+          "output": "main"
+        },
+        "target": {
+          "nodeId": "end",
+          "input": "main"
+        },
+        "transform": {
+          "enabled": false,
+          "instruction": ""
+        },
+        "condition": null
+      }
+    ],
+    "settings": {
+      "maxIterations": 10,
+      "timeoutMs": 300000
+    },
+    "loops": [],
+    "layout": {},
+    "revision": 1
+  },
+  "userInput": "GO",
+  "createdBy": "human",
+  "status": "terminated",
+  "startedAt": "2026-09-01T07:31:27.904Z",
+  "stepCount": 1,
+  "nodeRunCount": {},
+  "loopCount": {},
+  "nodeStates": {
+    "start": {
+      "status": "success",
+      "iteration": 1,
+      "inputReady": [],
+      "attempt": 0
+    },
+    "planner": {
+      "status": "skipped",
+      "iteration": 0,
+      "inputReady": [],
+      "attempt": 0
+    },
+    "approve": {
+      "status": "skipped",
+      "iteration": 0,
+      "inputReady": [],
+      "attempt": 0
+    },
+    "end": {
+      "status": "skipped",
+      "iteration": 0,
+      "inputReady": [],
+      "attempt": 0
+    }
+  },
+  "outputs": {
+    "start": [
+      {
+        "runIndex": 1,
+        "content": "GO",
+        "durationMs": 0,
+        "finishedAt": "2026-09-01T07:31:27.905Z"
+      }
+    ]
+  },
+  "artifacts": {},
+  "edgeState": {
+    "e0": {
+      "passable": true
+    },
+    "e1": {
+      "passable": true
+    },
+    "e2": {
+      "passable": true
+    }
+  },
+  "reviewTasks": [],
+  "auditLog": [],
+  "pendingFeedback": {},
+  "convergedLoops": {},
+  "humanTasks": [],
+  "error": {
+    "code": "max_steps",
+    "message": "reached maxExecutionSteps=undefined"
+  },
+  "id": "exec_1788247887904_1"
+}

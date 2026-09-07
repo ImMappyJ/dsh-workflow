@@ -1,0 +1,380 @@
+{
+  "executionId": "exec_1788248066535_3",
+  "workflowId": "wf_human_ca",
+  "workflowVersion": 3,
+  "defSnapshot": {
+    "version": "1.0",
+    "id": "wf_human_ca",
+    "name": "human-ca-walkthrough",
+    "createdAt": "2026-09-01T00:00:00Z",
+    "updatedAt": "2026-09-01T07:34:26.524Z",
+    "nodes": [
+      {
+        "id": "start",
+        "type": "start",
+        "name": "start",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-start"
+        },
+        "roleDescription": "desc-start",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {}
+      },
+      {
+        "id": "planner",
+        "type": "agent",
+        "name": "planner",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-planner"
+        },
+        "roleDescription": "desc-planner",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {}
+      },
+      {
+        "id": "approve",
+        "type": "human_task",
+        "name": "approve",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-approve"
+        },
+        "roleDescription": "人工审批",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {
+          "taskPrompt": "请人工确认上线清单"
+        }
+      },
+      {
+        "id": "end",
+        "type": "end",
+        "name": "end",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-end"
+        },
+        "roleDescription": "desc-end",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {}
+      }
+    ],
+    "edges": [
+      {
+        "id": "e0",
+        "source": {
+          "nodeId": "start",
+          "output": "main"
+        },
+        "target": {
+          "nodeId": "planner",
+          "input": "main"
+        },
+        "transform": {
+          "enabled": false,
+          "instruction": ""
+        },
+        "condition": null
+      },
+      {
+        "id": "e1",
+        "source": {
+          "nodeId": "planner",
+          "output": "main"
+        },
+        "target": {
+          "nodeId": "approve",
+          "input": "main"
+        },
+        "transform": {
+          "enabled": false,
+          "instruction": ""
+        },
+        "condition": null
+      },
+      {
+        "id": "e2",
+        "source": {
+          "nodeId": "approve",
+          "output": "main"
+        },
+        "target": {
+          "nodeId": "end",
+          "input": "main"
+        },
+        "transform": {
+          "enabled": false,
+          "instruction": ""
+        },
+        "condition": null
+      }
+    ],
+    "settings": {
+      "maxIterations": 10,
+      "maxExecutionSteps": 100,
+      "timeoutMs": 300000
+    },
+    "loops": [],
+    "layout": {},
+    "revision": 3
+  },
+  "userInput": "GO",
+  "createdBy": "human",
+  "status": "completed",
+  "startedAt": "2026-09-01T07:34:26.535Z",
+  "stepCount": 3,
+  "nodeRunCount": {
+    "planner": 1,
+    "approve": 1
+  },
+  "loopCount": {},
+  "nodeStates": {
+    "start": {
+      "status": "success",
+      "iteration": 1,
+      "inputReady": [],
+      "attempt": 0
+    },
+    "planner": {
+      "status": "success",
+      "iteration": 1,
+      "inputReady": [],
+      "attempt": 1,
+      "lastInputVersion": 1
+    },
+    "approve": {
+      "status": "success",
+      "iteration": 1,
+      "inputReady": [],
+      "attempt": 0,
+      "lastInputVersion": 1
+    },
+    "end": {
+      "status": "success",
+      "iteration": 1,
+      "inputReady": [],
+      "attempt": 0
+    }
+  },
+  "outputs": {
+    "start": [
+      {
+        "runIndex": 1,
+        "content": "GO",
+        "durationMs": 0,
+        "finishedAt": "2026-09-01T07:34:26.535Z"
+      }
+    ],
+    "planner": [
+      {
+        "runIndex": 1,
+        "content": "mock output of planner #1",
+        "durationMs": 0,
+        "tokenUsage": {
+          "prompt": 100,
+          "completion": 50
+        },
+        "finishedAt": "2026-09-01T07:34:26.535Z"
+      }
+    ],
+    "approve": [
+      {
+        "runIndex": 1,
+        "content": "上线清单已确认，可以发布。",
+        "durationMs": 0,
+        "finishedAt": "2026-09-01T07:37:05.248Z"
+      }
+    ]
+  },
+  "artifacts": {
+    "planner": [
+      {
+        "id": "artifact_9a7675c5",
+        "type": "markdown",
+        "kind": "markdown",
+        "content": "mock output of planner #1",
+        "sourceNodeId": "planner",
+        "version": 1,
+        "createdBy": "agent",
+        "parentVersion": null,
+        "reviewComment": null,
+        "createdAt": "2026-09-01T07:34:26.535Z",
+        "storage": "inline"
+      }
+    ],
+    "approve": [
+      {
+        "id": "artifact_19ceebb5",
+        "type": "markdown",
+        "content": "上线清单已确认，可以发布。",
+        "sourceNodeId": "approve",
+        "version": 1,
+        "createdBy": "human",
+        "parentVersion": null,
+        "createdAt": "2026-09-01T07:37:05.248Z"
+      }
+    ]
+  },
+  "edgeState": {
+    "e0": {
+      "passable": true
+    },
+    "e1": {
+      "passable": true
+    },
+    "e2": {
+      "passable": true
+    }
+  },
+  "reviewTasks": [],
+  "auditLog": [],
+  "pendingFeedback": {},
+  "convergedLoops": {},
+  "humanTasks": [
+    {
+      "id": "htask_d9ac5008",
+      "executionId": "exec_1788248066535_3",
+      "nodeId": "approve",
+      "prompt": "请人工确认上线清单",
+      "status": "completed",
+      "content": "上线清单已确认，可以发布。",
+      "note": "负责人/张三",
+      "createdAt": "2026-09-01T07:34:26.535Z",
+      "resolvedAt": "2026-09-01T07:37:05.248Z"
+    }
+  ],
+  "id": "exec_1788248066535_3"
+}

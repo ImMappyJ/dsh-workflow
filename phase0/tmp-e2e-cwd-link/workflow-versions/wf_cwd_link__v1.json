@@ -1,0 +1,193 @@
+{
+  "id": "wf_cwd_link__v1",
+  "workflowId": "wf_cwd_link",
+  "revision": 1,
+  "savedAt": "2026-09-02T03:02:40.274Z",
+  "def": {
+    "version": "1.0",
+    "id": "wf_cwd_link",
+    "name": "cwd-link-e2e",
+    "createdAt": "2026-09-02T00:00:00Z",
+    "updatedAt": "2026-09-02T03:02:40.274Z",
+    "nodes": [
+      {
+        "id": "start",
+        "type": "start",
+        "name": "start",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-start"
+        },
+        "roleDescription": "desc-start",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {}
+      },
+      {
+        "id": "writer",
+        "type": "agent",
+        "name": "writer",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-writer"
+        },
+        "roleDescription": "desc-writer",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {}
+      },
+      {
+        "id": "end",
+        "type": "end",
+        "name": "end",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "identity": {
+          "name": "role-end"
+        },
+        "roleDescription": "desc-end",
+        "inputContract": {
+          "description": "",
+          "processing": "",
+          "selection": "",
+          "ignore": "",
+          "constraints": [],
+          "sourceMode": "all",
+          "selectedSourceNodeIds": []
+        },
+        "outputContract": {
+          "description": "",
+          "format": "markdown",
+          "schema": null,
+          "requiredSections": [],
+          "targets": [],
+          "condition": null
+        },
+        "modelConfig": {
+          "provider": "deepseek",
+          "model": "deepseek-chat"
+        },
+        "runtimeConfig": {
+          "maxRuns": 5,
+          "timeoutMs": 120000,
+          "retry": {
+            "enabled": false,
+            "maxRetries": 0,
+            "backoffMs": 0
+          },
+          "onFailure": "fail_workflow"
+        },
+        "metadata": {}
+      }
+    ],
+    "edges": [
+      {
+        "id": "e0",
+        "source": {
+          "nodeId": "start",
+          "output": "main"
+        },
+        "target": {
+          "nodeId": "writer",
+          "input": "main"
+        },
+        "transform": {
+          "enabled": false,
+          "instruction": ""
+        },
+        "condition": null
+      },
+      {
+        "id": "e1",
+        "source": {
+          "nodeId": "writer",
+          "output": "main"
+        },
+        "target": {
+          "nodeId": "end",
+          "input": "main"
+        },
+        "transform": {
+          "enabled": false,
+          "instruction": ""
+        },
+        "condition": null
+      }
+    ],
+    "settings": {
+      "maxExecutionSteps": 100,
+      "maxIterations": 10,
+      "timeoutMs": 300000,
+      "workspaceDir": "D:/Development Program/demo"
+    },
+    "loops": [],
+    "layout": {},
+    "revision": 1
+  }
+}
