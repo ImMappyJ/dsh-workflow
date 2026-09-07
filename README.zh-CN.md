@@ -273,11 +273,11 @@ node phase0/launch-server.mjs 3090
 
 ### 作为 DSH 插件部署
 
-插件已发布到 npm，包名为 `@immappyj/dsh-plugin-workflow`。在 DSH profile 的 `package.json` 中将其添加为依赖即可：
+插件已发布到 npm，包名为 `@mappyj/dsh-plugin-workflow`。在 DSH profile 的 `package.json` 中将其添加为依赖即可：
 
 ```bash
 cd ~/.dsh/profiles/web
-pnpm add @immappyj/dsh-plugin-workflow
+pnpm add @mappyj/dsh-plugin-workflow
 ```
 
 profile 的 `node_modules` 中将包含该插件。宿主通过 `cordis.patch.yml`（声明插件及其 `apiProxy` 注入）加载。

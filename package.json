@@ -1,5 +1,5 @@
 {
-  "name": "@immappyj/dsh-plugin-workflow",
+  "name": "@mappyj/dsh-plugin-workflow",
   "version": "0.1.0",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
