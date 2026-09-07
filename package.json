@@ -8,6 +8,14 @@
   "description": "Multi-Agent Workflow plugin for DeepSeek Harness (dsh)",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImMappyJ/dsh-workflow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ImMappyJ/dsh-workflow/issues"
+  },
+  "homepage": "https://github.com/ImMappyJ/dsh-workflow#readme",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
   "files": [
