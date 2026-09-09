@@ -10,7 +10,7 @@ dsh-workflow turns DeepSeek Harness from a single-agent interaction environment 
 
 A visual, auditable and resumable Agent workflow orchestration layer for DeepSeek Harness.
 
-![Version](https://img.shields.io/badge/version-0.1.4-blue)
+![Version](https://img.shields.io/badge/version-0.1.5-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178c6)
 ![Tests](https://img.shields.io/badge/tests-179%20passed-brightgreen)
 ![Status](https://img.shields.io/badge/status-Experimental-orange)
@@ -273,14 +273,40 @@ Then open **http://127.0.0.1:3090/** in your browser.
 
 ### Deploy as a DSH plugin
 
-The plugin is published on npm as `@mappyj/dsh-plugin-workflow`. Install it into any DSH profile:
+The plugin is published on npm as `@mappyj/dsh-plugin-workflow`.
+
+**Option 1 — DSH built-in plugin manager (recommended).** Open the terminal inside DSH Desktop (or run `dsh` from your shell) and use the official command — it handles installation, profile registration and state sync automatically:
 
 ```bash
-cd ~/.dsh/profiles/desktop
-pnpm add @mappyj/dsh-plugin-workflow
+dsh plugin add @mappyj/dsh-plugin-workflow
 ```
 
-The plugin automatically registers itself in the profile's `bundles` array via a postinstall script. Restart DSH Desktop and the plugin will serve on **port 3090**.
+> Note: DSH applies a supply-chain policy with a minimum release age for newly published packages. If a freshly published version is rejected, wait a few days or pin an older version.
+
+**Option 2 — manual pnpm install.** Install into the profile directory:
+
+```bash
+cd ~/.dsh/profiles/desktop   # or ~/.dsh/profiles/web
+pnpm add @mappyj/dsh-plugin-workflow
+pnpm approve-builds          # pnpm 11+: allow the postinstall auto-register script
+```
+
+Then make sure the package is listed in the `bundles` array of the profile's `package.json` (the postinstall script does this automatically when allowed to run):
+
+```json
+"dsh": {
+  "profile": {
+    "bundles": ["...", "@mappyj/dsh-plugin-workflow"]
+  }
+}
+```
+
+Restart DSH Desktop / the web host. The console prints a bilingual banner with the access URL, and the plugin serves on **port 3090**:
+
+```
+[zh] 工作流插件已启动：http://127.0.0.1:3090/
+[en] Workflow plugin is up: http://127.0.0.1:3090/
+```
 
 > **Alternative: local development.** If you are developing the plugin locally, use the `link:` protocol instead:
 > ```bash
@@ -404,7 +430,7 @@ docs/images/execution-history.png  (planned)
 
 ## Project Status
 
-**Experimental** (v0.1.4). The engine, editor and execution runtime are functional and covered by 179 passing tests, but the project is under active development — APIs and storage formats may still change.
+**Experimental** (v0.1.5). The engine, editor and execution runtime are functional and covered by 179 passing tests, but the project is under active development — APIs and storage formats may still change.
 
 ## Development
 

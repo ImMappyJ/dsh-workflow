@@ -10,7 +10,7 @@ dsh-workflow 将 DeepSeek Harness 从单 Agent 交互环境，升级为**可视�
 
 面向 DeepSeek Harness 的可视化、可审计、可续跑的 Agent 工作流编排层。
 
-![Version](https://img.shields.io/badge/version-0.1.4-blue)
+![Version](https://img.shields.io/badge/version-0.1.5-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178c6)
 ![Tests](https://img.shields.io/badge/tests-179%20passed-brightgreen)
 ![Status](https://img.shields.io/badge/status-Experimental-orange)
@@ -273,14 +273,40 @@ node phase0/launch-server.mjs 3090
 
 ### 作为 DSH 插件部署
 
-插件已发布到 npm，包名为 `@mappyj/dsh-plugin-workflow`。安装到任意 DSH profile 即可：
+插件已发布到 npm，包名为 `@mappyj/dsh-plugin-workflow`。
+
+**方式一 —— DSH 内置插件管理（推荐）。** 打开 DSH Desktop 内置终端（或在 Shell 中运行 `dsh`），使用官方命令安装，它会自动完成安装、profile 注册与状态同步：
 
 ```bash
-cd ~/.dsh/profiles/desktop
-pnpm add @mappyj/dsh-plugin-workflow
+dsh plugin add @mappyj/dsh-plugin-workflow
 ```
 
-插件通过 postinstall 脚本自动注册到该 profile 的 `bundles` 数组，重启 DSH Desktop 后将在 **3090 端口** 提供服务。
+> 注意：DSH 对新发布的包有供应链安全策略（最短发布冷却期）。如果刚发布的版本被拒绝，等几天再装或先固定旧版本。
+
+**方式二 —— 手动 pnpm 安装。** 进入 profile 目录安装：
+
+```bash
+cd ~/.dsh/profiles/desktop   # 或 ~/.dsh/profiles/web
+pnpm add @mappyj/dsh-plugin-workflow
+pnpm approve-builds          # pnpm 11+：放行 postinstall 自动注册脚本
+```
+
+然后确认 profile 的 `package.json` 中 `bundles` 数组包含该包（postinstall 脚本被放行时会自动添加）：
+
+```json
+"dsh": {
+  "profile": {
+    "bundles": ["...", "@mappyj/dsh-plugin-workflow"]
+  }
+}
+```
+
+重启 DSH Desktop / Web 宿主后，控制台会输出双语启动横幅（含访问地址），插件在 **3090 端口** 提供服务：
+
+```
+[zh] 工作流插件已启动：http://127.0.0.1:3090/
+[en] Workflow plugin is up: http://127.0.0.1:3090/
+```
 
 > **本地开发替代方案。** 如果你在本地开发插件，可用 `link:` 协议代替：
 > ```bash
@@ -404,7 +430,7 @@ docs/images/execution-history.png  （规划中）
 
 ## 项目状态
 
-**Experimental**（v0.1.4）。引擎、编辑器与执行运行时可正常工作，有 179 个通过的测试覆盖；但项目仍在快速开发中——API 与存储格式可能变化。
+**Experimental**（v0.1.5）。引擎、编辑器与执行运行时可正常工作，有 179 个通过的测试覆盖；但项目仍在快速开发中——API 与存储格式可能变化。
 
 ## 开发
 

@@ -858,7 +858,19 @@ export function apply(ctx: any, rawConfig: any = {}) {
     timer.unref?.();
   }
 
-  ctx.logger?.info?.(`workflow plugin 已上线: http://${config.host}:${config.port}/`);
+  // 控制台双语输出访问地址（直接打到 stdout，确保 CLI 控制台可见）
+  const displayHost = config.host === '0.0.0.0' ? '127.0.0.1' : config.host;
+  const url = `http://${displayHost}:${config.port}/`;
+  console.log([
+    '',
+    '  ─────────────────────────────────────────────────',
+    '  dsh-plugin-workflow',
+    '  [zh] 工作流插件已启动：' + url,
+    '  [en] Workflow plugin is up: ' + url,
+    '  ─────────────────────────────────────────────────',
+    '',
+  ].join('\n'));
+  ctx.logger?.info?.(`workflow plugin 已上线 / plugin online: ${url}`);
 }
 
 export default apply;
