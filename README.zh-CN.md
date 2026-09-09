@@ -10,7 +10,7 @@ dsh-workflow 将 DeepSeek Harness 从单 Agent 交互环境，升级为**可视�
 
 面向 DeepSeek Harness 的可视化、可审计、可续跑的 Agent 工作流编排层。
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Version](https://img.shields.io/badge/version-0.1.1-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178c6)
 ![Tests](https://img.shields.io/badge/tests-179%20passed-brightgreen)
 ![Status](https://img.shields.io/badge/status-Experimental-orange)
@@ -273,14 +273,14 @@ node phase0/launch-server.mjs 3090
 
 ### 作为 DSH 插件部署
 
-插件已发布到 npm，包名为 `@mappyj/dsh-plugin-workflow`。在 DSH profile 的 `package.json` 中将其添加为依赖即可：
+插件已发布到 npm，包名为 `@mappyj/dsh-plugin-workflow`。安装到任意 DSH profile 即可：
 
 ```bash
-cd ~/.dsh/profiles/web
+cd ~/.dsh/profiles/desktop
 pnpm add @mappyj/dsh-plugin-workflow
 ```
 
-profile 的 `node_modules` 中将包含该插件。宿主通过 `cordis.patch.yml`（声明插件及其 `apiProxy` 注入）加载。
+插件通过 postinstall 脚本自动注册到该 profile 的 `bundles` 数组，重启 DSH Desktop 后将在 **3090 端口** 提供服务。
 
 > **本地开发替代方案。** 如果你在本地开发插件，可用 `link:` 协议代替：
 > ```bash
@@ -404,7 +404,7 @@ docs/images/execution-history.png  （规划中）
 
 ## 项目状态
 
-**Experimental**（v0.1.0）。引擎、编辑器与执行运行时可正常工作，有 179 个通过的测试覆盖；但项目仍在快速开发中——API 与存储格式可能变化。
+**Experimental**（v0.1.1）。引擎、编辑器与执行运行时可正常工作，有 179 个通过的测试覆盖；但项目仍在快速开发中——API 与存储格式可能变化。
 
 ## 开发
 

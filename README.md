@@ -10,7 +10,7 @@ dsh-workflow turns DeepSeek Harness from a single-agent interaction environment 
 
 A visual, auditable and resumable Agent workflow orchestration layer for DeepSeek Harness.
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Version](https://img.shields.io/badge/version-0.1.1-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178c6)
 ![Tests](https://img.shields.io/badge/tests-179%20passed-brightgreen)
 ![Status](https://img.shields.io/badge/status-Experimental-orange)
@@ -273,14 +273,14 @@ Then open **http://127.0.0.1:3090/** in your browser.
 
 ### Deploy as a DSH plugin
 
-The plugin is published on npm as `@mappyj/dsh-plugin-workflow`. In the DSH profile's `package.json`, add it as a dependency:
+The plugin is published on npm as `@mappyj/dsh-plugin-workflow`. Install it into any DSH profile:
 
 ```bash
-cd ~/.dsh/profiles/web
+cd ~/.dsh/profiles/desktop
 pnpm add @mappyj/dsh-plugin-workflow
 ```
 
-The profile's `node_modules` will contain the plugin. The host loads it via `cordis.patch.yml` (which declares the plugin and its `apiProxy` injection).
+The plugin automatically registers itself in the profile's `bundles` array via a postinstall script. Restart DSH Desktop and the plugin will serve on **port 3090**.
 
 > **Alternative: local development.** If you are developing the plugin locally, use the `link:` protocol instead:
 > ```bash
@@ -404,7 +404,7 @@ docs/images/execution-history.png  (planned)
 
 ## Project Status
 
-**Experimental** (v0.1.0). The engine, editor and execution runtime are functional and covered by 179 passing tests, but the project is under active development — APIs and storage formats may still change.
+**Experimental** (v0.1.1). The engine, editor and execution runtime are functional and covered by 179 passing tests, but the project is under active development — APIs and storage formats may still change.
 
 ## Development
 
