@@ -1,4 +1,6 @@
+# dsh-plugin-workflow bundle patch: inserts plugin row into the profile.
+# The name matches the npm package name for Cordis to resolve the module.
 - insert:
     - id: workflow
-      name: 'dsh-plugin-workflow'
+      name: '@mappyj/dsh-plugin-workflow'
       inject: [apiProxy]
