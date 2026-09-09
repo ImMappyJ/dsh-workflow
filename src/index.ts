@@ -804,8 +804,17 @@ export function apply(ctx: any, rawConfig: any = {}) {
     ? path.resolve(config.dataDir)
     : path.join(process.env.DSH_HOME ? path.resolve(process.env.DSH_HOME) : path.join(os.homedir(), '.dsh'), 'workflow-plugin');
 
+  // 安全探测 apiProxy：cordis 对未 inject 的属性访问会抛 "cannot get property without inject"，
+  // 必须 try/catch 包裹；webServer 同理（下方 tryMountWorkflowEntry 已有 try/catch）。
+  let apiProxy: ApiProxyLike | undefined;
+  try {
+    apiProxy = ctx.apiProxy ?? ctx.get?.('apiProxy');
+  } catch {
+    apiProxy = undefined;
+  }
+
   const server = createWorkflowServer({
-    apiProxy: ctx.apiProxy ?? ctx.get?.('apiProxy', false) ?? ctx.get?.('apiProxy'),
+    apiProxy,
     port: config.port,
     host: config.host,
     mock: config.mock,
@@ -820,7 +829,12 @@ export function apply(ctx: any, rawConfig: any = {}) {
   // 注意：不得直接访问 ctx.webServer 属性（cordis 会抛 cannot get property without inject）；
   // 用 ctx.get() 免 inject 探测，缺服务/未激活时返回 undefined → 延迟重试数次后降级。
   const tryMountWorkflowEntry = (): boolean => {
-    const webServer: any = ctx.get?.('webServer') ?? ctx.webServer;
+    let webServer: any;
+    try {
+      webServer = ctx.get?.('webServer') ?? ctx.webServer;
+    } catch {
+      webServer = undefined; // 未 inject 时 cordis 抛异常，视为不可用
+    }
     if (!webServer?.register) return false;
     try {
       webServer.register({
