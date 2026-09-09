@@ -1,6 +1,7 @@
 # dsh-plugin-workflow bundle patch: inserts plugin row into the profile.
 # The name matches the npm package name for Cordis to resolve the module.
+# inject is declared in the source code (export const inject = ['apiProxy']),
+# so it's not needed here to avoid conflicts with Cordis loading.
 - insert:
     - id: workflow
       name: '@mappyj/dsh-plugin-workflow'
-      inject: [apiProxy]
