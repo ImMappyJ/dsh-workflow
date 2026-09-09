@@ -10,7 +10,7 @@ dsh-workflow 将 DeepSeek Harness 从单 Agent 交互环境，升级为**可视�
 
 面向 DeepSeek Harness 的可视化、可审计、可续跑的 Agent 工作流编排层。
 
-![Version](https://img.shields.io/badge/version-0.1.2-blue)
+![Version](https://img.shields.io/badge/version-0.1.3-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178c6)
 ![Tests](https://img.shields.io/badge/tests-179%20passed-brightgreen)
 ![Status](https://img.shields.io/badge/status-Experimental-orange)
@@ -404,7 +404,7 @@ docs/images/execution-history.png  （规划中）
 
 ## 项目状态
 
-**Experimental**（v0.1.2）。引擎、编辑器与执行运行时可正常工作，有 179 个通过的测试覆盖；但项目仍在快速开发中——API 与存储格式可能变化。
+**Experimental**（v0.1.3）。引擎、编辑器与执行运行时可正常工作，有 179 个通过的测试覆盖；但项目仍在快速开发中——API 与存储格式可能变化。
 
 ## 开发
 
