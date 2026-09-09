@@ -44,7 +44,9 @@ export const name = 'dsh-plugin-workflow';
 // 只声明必填的 apiProxy。webServer（任务 3 入口路由）不能进 inject：
 // 部分 profile（如 desktop）不提供 dsh-host-webserver，必填依赖会让插件树加载失败。
 // webServer 改用 ctx.get('webServer') 免 inject 可选探测（cordis 官方支持的无 inject 读取）。
-export const inject = ['apiProxy'];
+// apiProxy 不放在 inject 中（改为 apply 内 ctx.get 可选获取），
+// 避免 DSH Desktop 在未提供 apiProxy 服务时导致插件永久 pending。
+export const inject: string[] = [];
 // 零依赖：不导出 Config Schema（对齐已验证的参考插件形态），默认值在 apply 内合并
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
