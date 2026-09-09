@@ -10,7 +10,7 @@ dsh-workflow turns DeepSeek Harness from a single-agent interaction environment 
 
 A visual, auditable and resumable Agent workflow orchestration layer for DeepSeek Harness.
 
-![Version](https://img.shields.io/badge/version-0.1.1-blue)
+![Version](https://img.shields.io/badge/version-0.1.2-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178c6)
 ![Tests](https://img.shields.io/badge/tests-179%20passed-brightgreen)
 ![Status](https://img.shields.io/badge/status-Experimental-orange)
@@ -404,7 +404,7 @@ docs/images/execution-history.png  (planned)
 
 ## Project Status
 
-**Experimental** (v0.1.1). The engine, editor and execution runtime are functional and covered by 179 passing tests, but the project is under active development — APIs and storage formats may still change.
+**Experimental** (v0.1.2). The engine, editor and execution runtime are functional and covered by 179 passing tests, but the project is under active development — APIs and storage formats may still change.
 
 ## Development
 
